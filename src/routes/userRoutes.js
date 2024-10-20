@@ -1,12 +1,15 @@
-// src/routes/userRoutes.js
 import express from "express";
+import {
+  createUser,
+  deleteUsers,
+  getUsers,
+} from "../controllers/userController.js";
 // const router = express.Router();
-import { Router } from "express";
+const router = express.Router();
 // const userController = require("../controllers/userController");
 
-// Define routes
-Router.get("welcome", async (req, res) => {
-  res.status(200).json({ message: "Success" });
-});
+router.get("/", getUsers);
+router.get("/create", createUser);
+router.get("/delete", deleteUsers);
 
-export default Router;
+export default router;
