@@ -1,12 +1,12 @@
 import express from "express";
 import errorHandler from "./utils/errorHandler.js";
-import userRoutes from "./routes/userRoutes.js";
+import authRoutes from "./routes/authRoutes.js";
 const app = express();
 
 // Middleware
-app.use(express.json()); // Parse JSON request body
+app.use(express.json());
 
-app.use("/api", userRoutes);
+app.use("/api/auth", authRoutes);
 
 // Error handling middleware
 app.use(errorHandler);

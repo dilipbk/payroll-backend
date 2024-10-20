@@ -29,7 +29,17 @@ export const createUser = async (req, res) => {
     const result = await User.create(user);
     res.status(201).json(result);
   } catch (err) {
-    console.log("err", err);
+    console.log("err", err.errmsg);
+    res.status(500).json({ message: err.errmsg });
+  }
+};
+
+export const deleteUsers = async (req, res) => {
+  try {
+    await User.deleteMany();
+
+    res.status(200).json({ message: "Deleted Successfully" });
+  } catch (err) {
     res.status(500).json({ message: "Something went wrong" });
   }
 };
