@@ -20,7 +20,6 @@ app.use(cors(corsOptions));
 
 app.use("/api/auth", authRoutes);
 
-// Error handling middleware
 app.use(errorHandler);
 
 export default app;
