@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import bcrypt from "bcryptjs";
 
 const userSchema = new mongoose.Schema({
   first_name: {
@@ -11,6 +10,12 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     trim: true,
+  },
+  full_name: {
+    type: String,
+    default: function () {
+      return `${this.first_name} ${this.last_name}`.trim();
+    },
   },
   username: {
     type: String,
@@ -40,10 +45,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: null,
   },
-  role_users_id: {
-    type: String, // Role ID stored as a string like "1"
-    required: true,
-  },
+  roles: [{ type: mongoose.Schema.Types.ObjectId, ref: "Role" }],
   is_active: {
     type: String, // Stored as "1" or "0"
     default: "1",
@@ -65,45 +67,25 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: null,
   },
-  allowed_roles: {
-    type: [String],
-    default: null,
-  },
-  allow_client_grp: {
+  client_group: {
     type: String,
     default: "0",
   },
-  allow_company: {
+  company: {
     type: String,
     default: "0",
   },
-  allow_loc: {
+  location: {
     type: String,
     default: null,
   },
-  allow_sub_loc: {
+  sub_location: {
     type: String,
     default: null,
   },
-  allow_employee: {
+  employees: {
     type: String,
     default: null,
-  },
-  auto_client_grp: {
-    type: String,
-    default: "0",
-  },
-  auto_company: {
-    type: String,
-    default: "0",
-  },
-  auto_location: {
-    type: String,
-    default: "0",
-  },
-  auto_sub_location: {
-    type: String,
-    default: "0",
   },
   created_at: {
     type: Date,

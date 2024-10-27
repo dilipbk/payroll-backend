@@ -1,10 +1,5 @@
 import express from "express";
-import {
-  login,
-  protect,
-  authorize,
-  registerUser,
-} from "../controllers/authController.js";
+import authController from "../controllers/authController.js";
 import { body } from "express-validator";
 
 const router = express.Router();
@@ -16,9 +11,9 @@ router.post(
     body("username").not().isEmpty().withMessage("Username is required"),
     body("password").not().isEmpty().withMessage("Password is required"),
   ],
-  login
+  authController.login
 );
 
-router.post("/register", registerUser);
+router.post("/register", authController.registerUser);
 
 export default router;
